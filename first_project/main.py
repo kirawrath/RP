@@ -16,9 +16,24 @@ def hamming(m):
 		distances.append(dist)
 	return distances
 
+def nearest_neighbour(m):
+	distances = []
+	for i in m:
+		dist = []
+		for j in m:
+			if i == j:
+				continue
+			# Euclidian distance
+			d = pow(sum(map(lambda a, b: pow(b-a, 2), i, j)), 0.5)
+
+			dist.append(d)
+			
+		distances.append(dist)
+	return distances
+
 
 def main():
-	f = open('4Ndatabase_small', 'r')
+	f = open('4Ndatabase', 'r')
 
 	matrix=[]
 	line = f.readline()
@@ -36,7 +51,8 @@ def main():
 		matrix.append(values)
 		line = f.readline()
 	
-	print hamming(matrix)
+	#print hamming(matrix)
+	print nearest_neighbour(matrix)
 
 
 if __name__ == '__main__':
