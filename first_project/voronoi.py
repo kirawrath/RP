@@ -6,8 +6,10 @@ class Circle:
 		self.dots = three_dots
 		self.center = find_circumcenter(dots)
 		# Euclidian distance
-		d = pow(sum(map(lambda a, b: pow(a-b, 2), dots[0].pos, center)), 0.5)
+		d = pow(sum(map(lambda a, b: pow(a-b, 2), dots[0].pos, self.center)), 0.5)
 		self.radius = d
+	def __contains__(self, item):
+		return (item in self.dots)
 
 
 	def find_circumcenter(dots):
@@ -27,10 +29,19 @@ class Circle:
 	# return false otherwise.
 	def is_inside(dot):
 		# Euclidian distance
-		d = pow(sum(map(lambda a, b: pow(a-b, 2), dot.pos, center)), 0.5)
+		d = pow(sum(map(lambda a, b: pow(a-b, 2), dot.pos, self.center)), 0.5)
 		if d > self.radius:
 			return False
 		return True
+	def is_minimum(self, dots):
+		for d in dots:
+			if d not in self.dots:
+				dist = pow(sum(map(lambda a, b: pow(a-b, 2), d.pos, self.center)), 0.5)
+				if dist <= self.radius:
+					return False
+		return True
+
+
 
 class Voronoi:
 	def __init__(self):
@@ -44,33 +55,25 @@ class Voronoi:
 				classes.append(d.clas)
 		self.classes_size = len(classes)
 
-	def is_minimum_circle(dots):
-		# Find the radius
-
-		# Check whether the euclidian
-		# distance between each dot not
-		# defining the circle is greater
-		# than the radius
-		pass
-
-	def group_minimum_circles(self, dots):
+	def find_polygons(self, dots):
 		circles = []
 		for a in dots:
 			for b in dots:
 				for c in dots:
 					if a==b or a==c or b==c:
 						continue
-					if is_minimum_circle((a,b,c)):
-						circles.append((a,b,c))
+					circle = Circle([a,b,c])
+
+					if circle.is_minimum():
+						circles.append(circle)
+		# Find all triangles that a given dot
+		# is a vertex.
 		for dot in dots:
-			my_circles = []
+			circumcenters = []
 			for c in circles:
 				if dot in c:
-					my_circles.append(c)
-			circumcenters = []
-			for c in my_circles:
-				circumcenters.append(find_circumcenter(c))
-
+					circumcenters.append(c.center)
+			
 			# Now draw a polygon with the "circumcenters"
 			# points defining it.
 

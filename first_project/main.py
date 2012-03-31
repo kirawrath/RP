@@ -2,6 +2,7 @@
 import sys
 import random
 from pattern_machine import *
+from voronoi import *
 
 class Dot:
 	def __init__(self, position):
