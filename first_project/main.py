@@ -60,10 +60,13 @@ def main():
 
 	#random.shuffle(dots)
 
-	pm = pattern_machine()
-	pm.train(train_dots)
+	#pm = pattern_machine()
+	#pm.train(train_dots)
 	#pm.nearest_neighbour(dots)
-	pm.k_nearest_neighbour(dots, 2)
+	#pm.k_nearest_neighbour(dots, 2)
+	vor = Voronoi()
+	vor.train(train_dots)
+	vor.find_polygons(dots)
 
 	for d in dots:
 		print d,

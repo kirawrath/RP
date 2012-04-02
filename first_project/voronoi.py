@@ -4,15 +4,15 @@ class Circle:
 			print 'Warning: Voronoi isn\'t supposed to \
 					work with more than two dimensions'
 		self.dots = three_dots
-		self.center = find_circumcenter(dots)
+		self.center = self.find_circumcenter(self.dots)
 		# Euclidian distance
-		d = pow(sum(map(lambda a, b: pow(a-b, 2), dots[0].pos, self.center)), 0.5)
+		d = pow(sum(map(lambda a, b: pow(a-b, 2), self.dots[0].pos, self.center)), 0.5)
 		self.radius = d
 	def __contains__(self, item):
 		return (item in self.dots)
 
 
-	def find_circumcenter(dots):
+	def find_circumcenter(self, dots):
 		ax=dots[0].pos[0] ; ay=dots[0].pos[1]
 		bx=dots[1].pos[0] ; by=dots[1].pos[1]
 		cx=dots[2].pos[0] ; cy=dots[2].pos[1]
@@ -21,13 +21,13 @@ class Circle:
 		x=((ax*ax+ay*ay)*(by-cy)+(bx*bx+by*by)*(cy-ay)+(cx*cx+cy*cy)* \
 				(ay*ay-by*by))/D
 		y=((ax*ax+ay*ay)*(cx*cx-by*by)+(bx*bx+by*by)*(ax-cx)+ \
-				(cx*cx+cy*cy)*(bx-ax))D
+				(cx*cx+cy*cy)*(bx-ax))*D
 		return (x,y)
 
 	# Check whether the "dot"
 	# lies inside the circle
 	# return false otherwise.
-	def is_inside(dot):
+	def is_inside(self, dot):
 		# Euclidian distance
 		d = pow(sum(map(lambda a, b: pow(a-b, 2), dot.pos, self.center)), 0.5)
 		if d > self.radius:
@@ -64,7 +64,7 @@ class Voronoi:
 						continue
 					circle = Circle([a,b,c])
 
-					if circle.is_minimum():
+					if circle.is_minimum(dots):
 						circles.append(circle)
 		# Find all triangles that a given dot
 		# is a vertex.
