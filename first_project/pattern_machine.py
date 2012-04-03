@@ -63,7 +63,7 @@ class pattern_machine:
 		for dot in dots:
 			dist = float('inf')
 			for dbdot in self.dots_db:
-				d = sum(map(lambda a,b: abs(abs(a)-abs(b)), dos.pos, dbdot.pos))
+				d = sum(map(lambda a,b: abs(abs(a)-abs(b)), dot.pos, dbdot.pos))
 				if d < dist:
 					dist = d
 					dot.clas = dbdot.clas

@@ -4,7 +4,7 @@ import random
 from pattern_machine import *
 from voronoi import *
 from interface import *
-debug=1
+debug=0
 class Dot:
 	def __init__(self, position):
 		self.pos = position
