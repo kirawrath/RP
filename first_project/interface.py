@@ -8,24 +8,20 @@ QGraphicsPolygonItem, QPolygonF
 class MyView(QtGui.QGraphicsView):
 	def __init__(self):
 		self.gview = QtGui.QGraphicsView.__init__(self)
-
 		self.scene = QtGui.QGraphicsScene(self)
 		self.scene.setSceneRect(QtCore.QRectF(0, 0, 400, 400))
-
 		self.setScene(self.scene)
 
 	def draw_polygon(self, dots):
 		polygon = QPolygonF(map(lambda a: QPointF(a[0],a[1]), dots))
-
-		poly_item = QGraphicsPolygonItem(polygon,self.gview,self.scene)
+		QGraphicsPolygonItem(polygon,self.gview,self.scene)
 
 class Interface:
-	def __init__(self, argv):
-		self.app = QtGui.QApplication(argv)
+	def __init__(self):
+		self.app = QtGui.QApplication(sys.argv)
 		self.view = MyView()
 		self.view.show()
 	
-	#dots = [(,),(,),(,)]
 	def add_polygon(self,dots):
 		self.view.draw_polygon(dots)
 	

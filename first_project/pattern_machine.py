@@ -16,7 +16,6 @@ class pattern_machine:
 			for dbdot in self.dots_db:
 				# Euclidian distance
 				d = pow(sum(map(lambda a, b: pow(b-a, 2), dot.pos, dbdot.pos)), 0.5)
-				d = round(d, 3)
 				if d < dist:
 					dist = d
 					dot.clas = dbdot.clas
@@ -31,7 +30,6 @@ class pattern_machine:
 			for dbdot in self.dots_db:
 				# Euclidian distance
 				d = pow(sum(map(lambda a, b: pow(b-a, 2), dot.pos, dbdot.pos)), 0.5)
-				d = round(d, 3)
 
 				if d < voters[-1][1]:
 					voters[-1] = (dbdot, d)
@@ -61,12 +59,11 @@ class pattern_machine:
 			#print 'votes', votes
 
 
-	def hamming(dots):
+	def hamming(self, dots):
 		for dot in dots:
 			dist = float('inf')
 			for dbdot in self.dots_db:
-				d = sum(map(lambda a,b: abs(abs(a)-abs(b)), i, j))
-				d = round(d, 3)
+				d = sum(map(lambda a,b: abs(abs(a)-abs(b)), dos.pos, dbdot.pos))
 				if d < dist:
 					dist = d
 					dot.clas = dbdot.clas
