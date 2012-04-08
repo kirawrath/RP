@@ -88,18 +88,24 @@ class IBL3(IBL1):
 			#2.3
 			if nearest_dot.clas == d.clas:
 				hit += 1
+				# Update that dot register
+				if nearest_dot in map(lambda a:a[0], self.criteria):
+					for i, carl in enumerate(self.criteria):
+						if carl == nearest_dot:
+							self.criteria[i][1]+=1
+				else:
+					self.criteria.append([nearest_dot, 1, 0])
 			else:
 				miss += 1
 				self.DC.append(d)
 				dists.append((d,0)) # Not sure
 			#2.4
 			#TODO
-				#(acertos, num_rodadas)
-				
 
-			
-
+				#(dot, acertos, num_rodadas)
 		return (self.DC, hit, miss)
+
+
 
 
 

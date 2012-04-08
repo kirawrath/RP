@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import sys
 import random
-from interface import *
 from ibl import *
 from img_handler import *
 from random import random
@@ -23,7 +22,6 @@ def main():
 	else:
 		print 'No argument given, defaulting to \'./double.png\''
 		img = Img('double.png')
-	train_file = open('train_file', 'r')
 	
 
 	train_dots = img.parse_train_image()
