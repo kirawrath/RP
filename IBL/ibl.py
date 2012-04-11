@@ -65,8 +65,8 @@ class IBL2(IBL1):
 
 class IBL3(IBL1):
 	def train(self,dots):
-		self.DC=[]
-		self.criteria = []
+		#self.DC=[]
+		criteria = []
 		hit=0; miss=0
 		accep = 5
 		for d in dots:
@@ -89,12 +89,12 @@ class IBL3(IBL1):
 			if nearest_dot.clas == d.clas:
 				hit += 1
 				# Update that dot register
-				if nearest_dot in map(lambda a:a[0], self.criteria):
-					for i, carl in enumerate(self.criteria):
+				if nearest_dot in map(lambda a:a[0], criteria):
+					for i, carl in enumerate(criteria):
 						if carl == nearest_dot:
-							self.criteria[i][1]+=1
+							criteria[i][1]+=1
 				else:
-					self.criteria.append([nearest_dot, 1, 0])
+					criteria.append([nearest_dot, 1, 0])
 			else:
 				miss += 1
 				self.DC.append(d)
@@ -103,6 +103,7 @@ class IBL3(IBL1):
 			#TODO
 
 				#(dot, acertos, num_rodadas)
+			self.DC = [x[0] for x in criteria]
 		return (self.DC, hit, miss)
 
 
