@@ -77,7 +77,7 @@ def main():
 
 		###Sequential###########################
 		inp='Do you want to create an image using all pixels?'
-		inp+=' (it takes approximately 1 minute). [y/n] '
+		inp+=' (it takes approximately 1 minute). [y/N] '
 		inp = raw_input(inp)
 		if inp == 'y':
 			print 'Creating a matrix with sequential points...'

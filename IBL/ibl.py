@@ -64,47 +64,61 @@ class IBL2(IBL1):
 		return (self.DC, hit, miss)
 
 class IBL3(IBL1):
+	def acceptable(y):
+		print 'not implemented yet!'
+		return False
+
 	def train(self,dots):
-		#self.DC=[]
-		criteria = []
+		criteria = [] #Data Structure to manage DC.
+		#criteria = {dot,dist,hits,num_tries,IP}
+		# Usage:
+		# criteria[3]['dot'] <- to get the dot indexed by 3
 		hit=0; miss=0
 		accep = 5
 		for d in dots:
-			dists = []
-			for dc in self.DC:
-				dist = self.euclidian_dist(d,dc)
-				dists.append((dc, dist))
-
+			for dc in criteria:
+				dist = self.euclidian_dist(d,dc['dist'])
+				dc['dist'] = dist
+				
 			#2.2
-			dists.sort(lambda a: a[1])
-			nearest_dot, nearest_dist = dists[0]
-
-			if nearest_dist < accep: # Acceptable
-				pass
+			criteria.sort(lambda a: a['dist'])
+			nearest = criteria[0] # just initializing with anything
+			for dc in criteria:
+				if self.acceptable(dc):
+					nearest = dc
+					break					
 			else:
 				r = random.random()
-				r = int(r*len(dists))
-				nearest_dot, nearest_dist = dists[r]
+				r = int(r*len(criteria))
+				nearest = criteria[r]
 			#2.3
-			if nearest_dot.clas == d.clas:
+			if nearest['dot'].clas == d.clas:
 				hit += 1
 				# Update that dot register
-				if nearest_dot in map(lambda a:a[0], criteria):
-					for i, carl in enumerate(criteria):
-						if carl == nearest_dot:
-							criteria[i][1]+=1
-				else:
-					criteria.append([nearest_dot, 1, 0])
+				nearest['num_tries'] += 1
+				nearest['hits'] += 1
+				# Update IP?
 			else:
 				miss += 1
-				self.DC.append(d)
-				dists.append((d,0)) # Not sure
+				newd = {}
+				newd['dot'] = d ; newd['dist'] = 0
+				newd['hits'] = 0 ; newd['num_tries'] = 0
+				newd['IP'] = 0 #??
+				criteria.append(newd)
 			#2.4
-			#TODO
+			deads=[] #dots marked for removal
+			for dc in criteria:
+				if dc['dist'] <= nearest['dist']:
+					dc['num_tries'] += 1
+					#dc['IP'] ??
+					# se registro se classificação for ruim:
+					if True:
+						#WARNING: NEVER REMOVE DURING AN ITERATION!!!
+						deads.append(dc)
+			for dead in deads:
+				del( criteria[criteria.index(dead)] )
 
-				#(dot, acertos, num_rodadas)
-			self.DC = [x[0] for x in criteria]
-		return (self.DC, hit, miss)
+		return ([i['dots'] for i in criteria], hit, miss)
 
 
 
