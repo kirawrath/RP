@@ -1,4 +1,5 @@
-
+#--*--coding: utf8 --*--
+import random
 class IBL1:
 	def __init__(self):
 		pass
@@ -64,27 +65,67 @@ class IBL2(IBL1):
 		return (self.DC, hit, miss)
 
 class IBL3(IBL1):
-	def acceptable(y):
-		print 'not implemented yet!'
+	def acceptable(self, dotinfo, nclasses, ntotal, z):
+		clas = str(dotinfo['dot'].clas)
+		p = float(dotinfo['hits']) / nclasses[clas]
+		n = dotinfo['num_tries']
+
+		first = p+z*z/(2*n)
+		second = z*pow( p*(1-p)/n + (z*z)/(4*n*n) ,0.5)
+		dem = 1+(z*z)/n
+
+		iplower = (first - second)/dem
+		ipupper = (first + second)/dem
+
+
+		p = float(nclasses[clas])/sum([nclasses[i] for i in iter(nclasses)])
+		n = ntotal
+
+		first = p+z*z/(2*n)
+		second = z*pow( p*(1-p)/n + (z*z)/(4*n*n) ,0.5)
+		dem = 1+(z*z)/n
+
+		iflower = (first - second)/dem
+		ifupper = (first + second)/dem
+
+		if z < 0.8 and ipupper < iflower:
+			return 'discard'
+		if ifupper < iplower:
+			return True
 		return False
 
 	def train(self,dots):
 		criteria = [] #Data Structure to manage DC.
-		#criteria = {dot,dist,hits,num_tries,IP}
+		nclasses = {}
+		newd = {}
+		newd['dot'] = dots[0] ; newd['dist'] = 0
+		newd['hits'] = 0 ; newd['num_tries'] = 1
+		criteria.append(newd)
+		nclasses[str(dots[0].clas)] = 1
+		#criteria = {dot,dist,hits,num_tries,}
 		# Usage:
 		# criteria[3]['dot'] <- to get the dot indexed by 3
 		hit=0; miss=0
-		accep = 5
-		for d in dots:
+		accep = 0.9
+		discard = 0.75
+		dots_processed=0
+		for d in dots[1:]:
+			dots_processed+=1
+			clas = str(d.clas)
+			if clas in nclasses:
+				nclasses[clas] += 1
+			else:
+				nclasses[clas] = 1
+
 			for dc in criteria:
-				dist = self.euclidian_dist(d,dc['dist'])
+				dist = self.euclidian_dist(d,dc['dot'])
 				dc['dist'] = dist
 				
 			#2.2
-			criteria.sort(lambda a: a['dist'])
-			nearest = criteria[0] # just initializing with anything
+			criteria.sort(key = lambda a: a['dist'])
+			nearest = None # just initializing with anything
 			for dc in criteria:
-				if self.acceptable(dc):
+				if self.acceptable(dc, nclasses, dots_processed, accep):
 					nearest = dc
 					break					
 			else:
@@ -97,30 +138,30 @@ class IBL3(IBL1):
 				# Update that dot register
 				nearest['num_tries'] += 1
 				nearest['hits'] += 1
-				# Update IP?
+				# Update IP
 			else:
 				miss += 1
 				newd = {}
 				newd['dot'] = d ; newd['dist'] = 0
 				newd['hits'] = 0 ; newd['num_tries'] = 0
-				newd['IP'] = 0 #??
 				criteria.append(newd)
+
 			#2.4
 			deads=[] #dots marked for removal
 			for dc in criteria:
 				if dc['dist'] <= nearest['dist']:
 					dc['num_tries'] += 1
-					#dc['IP'] ??
 					# se registro se classificação for ruim:
-					if True:
+					if self.acceptable(dc, nclasses, dots_processed, discard) == 'discard':
 						#WARNING: NEVER REMOVE DURING AN ITERATION!!!
-						deads.append(dc)
+						if dc['num_tries'] > 30:
+							deads.append(dc)
 			for dead in deads:
 				del( criteria[criteria.index(dead)] )
 
-		return ([i['dots'] for i in criteria], hit, miss)
-
-
+		self.DC = [i['dot'] for i in criteria]
+		print 'DC length: ',len(self.DC)
+		return (self.DC, hit, miss)
 
 
 
