@@ -1,5 +1,6 @@
 #--*--coding: utf8 --*--
 import random
+from dot import Dot
 class IBL1:
 	def __init__(self):
 		pass
@@ -49,9 +50,9 @@ class IBL2(IBL1):
 	def train(self,dots):
 		self.DC=[]
 		hit=0; miss=0
+		nearest_dot = Dot((),()) #Just a fake dot
 		for d in dots:
 			nearest = float('inf')
-			nearest_dot = dots[0]
 			for dc in self.DC:
 				dist = self.euclidian_dist(d,dc)
 				if dist < nearest:

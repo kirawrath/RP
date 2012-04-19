@@ -1,6 +1,7 @@
 from PIL import Image
 import sys
 from main import Dot
+from random import random
 class Img:
 	def __init__(self,imgname=None):
 		self.imgname = imgname
@@ -19,13 +20,22 @@ class Img:
 		return img
 
 	def paint(self, dots):
+		if type(dots[0].clas) is str:
+			colors={}
+			for d in dots:
+				if d.clas not in colors:
+					colors[d.clas] = (int(255*random()),int(255*random()),\
+							int(255*random()),255)							
+				self.img.putpixel((int(d.pos[0]),int(d.pos[1])),\
+						colors[d.clas])
+			return
+
 		for d in dots:
 			try:
 				self.img.putpixel((int(d.pos[0]),int(d.pos[1])),\
 						d.clas)
 			except IndexError:
 				print 'IndexError! (img)'
-
 
 	def parse_train_image(self):
 		self.img = Image.open(self.imgname)

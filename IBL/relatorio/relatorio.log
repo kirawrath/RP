@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.3.20)  18 APR 2012 17:22
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.3.20)  18 APR 2012 22:18
 entering extended mode
  %&-line parsing enabled.
 **relatorio.tex
@@ -384,46 +384,56 @@ LaTeX Font Info:    ... okay on input line 17.
 \MPscratchDim=\dimen109
 \MPnumerator=\count98
 \everyMPtoPDFconversion=\toks21
-) <./outputs/double3000dots.png, id=1, 375.4025pt x 400.49625pt>
-File: ./outputs/double3000dots.png Graphic file (type png)
+) <./outputs/double30000dots.png, id=1, 375.4025pt x 400.49625pt>
+File: ./outputs/double30000dots.png Graphic file (type png)
 
-<use ./outputs/double3000dots.png>
+<use ./outputs/double30000dots.png>
 <./outputs/sequentialdouble.png, id=2, 375.4025pt x 400.49625pt>
 File: ./outputs/sequentialdouble.png Graphic file (type png)
 
-<use ./outputs/sequentialdouble.png>
-<./outputs/simple3000dots.png, id=3, 515.9275pt x 602.25pt>
-File: ./outputs/simple3000dots.png Graphic file (type png)
+<use ./outputs/sequentialdouble.png> [1
 
-<use ./outputs/simple3000dots.png>
-<./outputs/sequentialsimple.png, id=4, 515.9275pt x 602.25pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <./outputs/simple30000dots
+.png, id=9, 515.9275pt x 602.25pt>
+File: ./outputs/simple30000dots.png Graphic file (type png)
+
+<use ./outputs/simple30000dots.png>
+<./outputs/sequentialsimple.png, id=10, 515.9275pt x 602.25pt>
 File: ./outputs/sequentialsimple.png Graphic file (type png)
 
-<use ./outputs/sequentialsimple.png> [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<use ./outputs/sequentialsimple.png> [2 <./outputs/double30000dots.png (PNG cop
+y)>]
 Overfull \hbox (4.08101pt too wide) in paragraph at lines 61--62
 []\OT1/cmr/m/n/12 Apesar do al-go-ritmo de treino ser mais com-plexo, tanto na 
 im-ple-menta^^Xc~ao,
  []
 
-[2] [3 <./outputs/double3000dots.png (PNG copy)>] [4 <./outputs/sequentialdoubl
-e.png (PNG copy)>] [5 <./outputs/simple3000dots.png (PNG copy)>] [6 <./outputs/
-sequentialsimple.png (PNG copy)>] (./relatorio.aux) ) 
+
+Overfull \hbox (2.77231pt too wide) in paragraph at lines 61--62
+\OT1/cmr/m/n/12 quanto no de-sem-pe-nho, o al-go-ritmo de clas-si-fica^^Xc~ao a
+inda ^^Se o mesmo, por-tanto
+ []
+
+<./outputs/square.png, id=14, 140.525pt x 140.525pt>
+File: ./outputs/square.png Graphic file (type png)
+
+<use ./outputs/square.png> [3] [4 <./outputs/sequentialdouble.png (PNG copy)>]
+[5 <./outputs/simple30000dots.png (PNG copy)>] [6 <./outputs/sequentialsimple.p
+ng (PNG copy)>] [7 <./outputs/square.png (PNG copy)>] (./relatorio.aux) ) 
 Here is how much of TeX's memory you used:
  2031 strings out of 495041
- 26573 string characters out of 1181897
+ 26623 string characters out of 1181897
  81122 words of memory out of 3000000
- 5184 multiletter control sequences out of 15000+50000
+ 5183 multiletter control sequences out of 15000+50000
  4544 words of font info for 17 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
- 29i,5n,32p,566b,240s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmr12.pfb>
-Output written on relatorio.pdf (6 pages, 122182 bytes).
+ 29i,6n,32p,647b,244s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on relatorio.pdf (7 pages, 124621 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
+ 39 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
