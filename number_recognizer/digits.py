@@ -3,12 +3,12 @@ from pybrain.datasets import SupervisedDataSet
 from PIL import Image
 import os
 from string import find
-debug=1
-class XORDataSet(SupervisedDataSet):
+
+class DigitsDataSet(SupervisedDataSet):
 	def __init__(self):
 		SupervisedDataSet.__init__(self, 10*15, 1)
 		
-		imgnames = os.listdir('./dataset')
+		imgnames = sorted(os.listdir('./dataset'))
 		for iname in imgnames:
 			img = Image.open('./dataset/'+iname)
 			w,h = img.size
