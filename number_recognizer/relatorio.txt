@@ -1,0 +1,15 @@
+Relatorio
+
+O trabalho implementado utilizou-se da biblioteca pybrain para reconhecer as imagens dadas. Estas imagens estão localizadas na pasta "dataset" desta pasta.
+Para executar o programa sem o CVFlow, basta utilizar a opção --no-cv (./main.py --no-cv). Este programa também roda dentro do CVFlow, para isto ele recebe exatos 11 argumentos da linha de comando, um para cada uma das imagens disponívels dos números de 0 a 9, e o último para saber o nome do arquivo em que deve ser escrito o output.
+
+As imagens recebidas são convertidas em listas unidimensionais de pixels e armazenadas num objeto que extende o "SupervisionedDataset", que é um objeto que além de guardar as amostras também possui alguns métodos úteis.
+
+Após este processamento, as imagens são então aprendidas utilizando um objeto que extende o BackpropTrainer, que é um objeto da biblioteca responsável por treinar e testar os dados de um dado dataset. Este objeto foi um pouco modificado para oferecer um output mais adequado.
+
+Feito isto, alguns dados são impressos na tela e também salvos num arquivo, cujo nome é especificado como último argumento, no caso do CVFlow, ou com o nome default de "output" no caso de se usar a flag --no-cv
+
+Frequentemente lidar com os parâmetros de algum método de IA é delicado, através de alguma experimentação chegou-se ao resultado que um bom número para a taxa de aprendizado é 0.01 e o número de "hidden layers" como 2.
+
+Treinando-se por 10000 épocas já se chega num resultado aceitável, acertando na maioria das vezes no reconhecimendo dos números, tomando cerca de 1 minuto no processo. Node que aumentando o número de épocas o programa fica consideravelmente mais preciso, no entanto, é claro, ele exige mais tempo para isto.
+
