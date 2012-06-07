@@ -1,14 +1,25 @@
 #!/usr/bin/env python
 from matplotlib.pyplot import show
 from hcluster import dendrogram
+import sys
 debug=0
-data =[
-		[0.2, 0],
-		[0.1,0.5],
-		[0 ,-0.3],
-		[-1, 1 ],
-		[0.1,-0.1]
-		]
+def parse_file(filename):
+	f = open(filename)
+	line = f.readline()
+	dots=[]
+	while line != '':
+		# Converting the input line into a list of numbers
+		values = []
+		num = ''
+		line = line.rstrip('\n')
+		line = line.replace(',', ' ')
+		line = line.split()
+		for d in line:
+			values.append(float(d))
+		d=values
+		dots.append(d)
+		line = f.readline()
+	return dots
 def standartizate(data):
 	w=len(data[0])
 	h=len(data)
@@ -82,12 +93,23 @@ def dist_from_data(data):
 
 
 def main():
+	filename='iris2d.data'
+	if len(sys.argv) > 1:
+		filename = sys.argv[1]
+	else:
+		print 'Assuming filename \'iris2d.data\''
+	data = parse_file(filename)
+
+	minclass = int(raw_input('Minclass: '))
+	maxclass = int(raw_input('Maxclass: '))
+
 	standartizate(data)
 	dists = dist_from_data(data)
 	nick = len(dists)
 	lend=nick
 	n1 = lend-1
 	linkage=[]
+	merge_points=[]
 	# charlie[index used in dist matrix] = [ new cluster nick, number of children ]
 	charlie=dict()
 	for i in range(lend):
@@ -107,12 +129,28 @@ def main():
 
 		charlie[e0][0] = nick
 		nick+=1
+		#n1 contains the number of classes
+		if n1 <= maxclass and n1 >= minclass:
+			merge_points.append(d)
+			
+	# Finding the cutting point
+	max_dist=0
+	index=-1
+	print merge_points
+	for i in range(len(merge_points)-1):
+		d = merge_points[i+1] - merge_points[i]
+		if d > max_dist:
+			max_dist = d
+			index = i
+
+	assert index >= 0
+	print 'Cutting point is at y='+str(merge_points[index])
 	
 	print 'Showing the image...'
+	
 	dendrogram(linkage)
 	show()
 		
-
 
 
 if __name__ == '__main__':
