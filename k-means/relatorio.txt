@@ -1,0 +1,13 @@
+Implementação do K-Médias
+
+Para executar faça "python main.py nome_do_arquivo_de_teste", caso nenhum seja passado como argumento, será assumido o iris2d que está nesta pasta.
+O arquivo de teste está em 2D apenas para ter um resultado mais inteligível, mas o programa trabalha com dados em qualquer dimensão.
+
+Quando o programa inicia, ele dá a opção de pedir para o programa executar utilizando um K em específico ou iterar um K dentro de um intervalo. 
+
+O algoritmo de K-Médias é um algoritmo NP-Hard, portanto eu garanto que a execução deste programa não se dará em tempo polinomial (=
+Existem eurísticas que convergem para uma solução ótima local no entanto isto não foi feito por não fazer parte do escopo do trabalho.
+
+O que o K-Médias faz é pegar um conjunto de pontos não classifidados e classificá-los em k classes e a função do IBL é pegar um pequeno conjunto de dados classificados, criar um descritor conceitual, e então generalizar a classificação de qualquer ponto pertencente ao domínio de acordo com o descritor conceitual. Portanto eu ofereci a opção de que se o usuário usou uma base de dados 2D, após separar os dados nas k classes o programa pode jogar estes pontos para que o IBL os processe, deste modo oferecendo uma maneira o usuário conferir visualmente o se o resultado faz sentido. Através de experimentação foi possível de se notar que quando o usuário "acerta" na escolha do K, na imagem pode-se observar que os dados são separados áreas de tamanho semelhante.
+
+Também foi implementado o Teste-F (usando a tabela) de acordo com a definição dada em aula.
