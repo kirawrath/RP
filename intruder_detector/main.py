@@ -2,6 +2,7 @@ from subtract import subtract
 from threshold import threshold
 from erode import erode
 from sys import argv
+
 def main():
 	imgname1='imgs/porta1pb.pnm'
 	imgname2='imgs/porta2pb.pnm'
