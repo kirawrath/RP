@@ -5,7 +5,7 @@ from sys import argv
 
 def main():
 	imgname1='imgs/porta1pb.pnm'
-	imgname2='imgs/porta2pb.pnm'
+	imgname2='imgs/larapiopb.pnm'
 	if len(argv)>2:
 		imgname1=argv[1]
 		imgname2=argv[2]
@@ -13,7 +13,7 @@ def main():
 	print 'Subtracting...'
 	subtract(imgname1, imgname2)
 	print 'Thresholding...'
-	threshold('subtracted_image.png', 75)
+	threshold('subtracted_image.png', 50)
 	print 'Eroding...'
 	erode('thresholded_image.png')
 
