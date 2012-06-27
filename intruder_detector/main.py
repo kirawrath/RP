@@ -1,6 +1,7 @@
 from subtract import subtract
 from threshold import threshold
 from erode import erode
+from dilate import dilate
 from sys import argv
 
 def main():
@@ -13,9 +14,16 @@ def main():
 	print 'Subtracting...'
 	subtract(imgname1, imgname2)
 	print 'Thresholding...'
-	threshold('subtracted_image.png', 50)
+	threshold('subtracted_image.png', 65)
 	print 'Eroding...'
+	k=open('kernel', 'w')
+	k.write('''1 1 1 1 1
+	1 1 1 1 1
+	1 1 1 1 1''')
+	k.close()
 	erode('thresholded_image.png')
+	print 'Dilating...'
+	dilate('eroded_image.png')
 
 	
 
