@@ -4,7 +4,7 @@ kernel = [[0, 1, 0],
 		  [1, 1, 1],
 		  [0, 1, 0]]
 '''
-def erode(imgname, dilate=False):
+def erode(imgname, dilate=False, outfile=None):
 	kf = open('kernel')
 	st = kf.readline()
 	kernel=[]
@@ -47,9 +47,13 @@ def erode(imgname, dilate=False):
 					if e==aux:
 						break
 				result.putpixel((i,j), e)
-	
+
 	if dilate:
-		result.save('dilated_image.png')
+		if outfile == None:
+			outfile = 'dilated_image.png'
+		result.save(outfile)
 	else:
-		result.save('eroded_image.png')
+		if outfile == None:
+			outfile = 'eroded_image.png'
+		result.save(outfile)
 	return result

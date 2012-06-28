@@ -1,8 +1,4 @@
 from erode import erode
 
-kernel = [[1, 1, 1],
-		  [1, 1, 1],
-		  [1, 1, 1]]
-
-def dilate(imgname):
-	return erode(imgname, True)
+def dilate(imgname, outfile=None):
+	return erode(imgname, True, outfile)

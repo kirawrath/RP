@@ -1,0 +1,28 @@
+Além do CVflow, este programa pode ser rodado através do main da seguinte forma: "python main.py img/algumaimg.png img/outraimg.png".
+
+Este programa tem como objetivo reconhecer intrusos (pessoas) e também animais (cachorros). Para isto, a imagem passa por uma série de processos para que possamos "limpar" a imagem de informação desnecessária.
+
+Primeiro, a imagem é convertida para tons de cinza (se já não o estiver), pois para nós só interessa a diferença de luminosidade entre cada imagem.
+
+A imagem é então subtraída de outra (por exemplo, uma imagem somente com a porta e outra com um intruso na frente), resultando que, nas regiões onde não houveram mudança, ficarão pretas, e a diferença entre as duas será uma imagem esbranquiçada.
+
+Agora queremos transformar a imagem numa binária (somente duas cores), ao invés de tons de cinza, para deixar mais claro e de mais fácil processo o processo de reconhecimento. Para isto passamos a imagem pelo processo de threshold.
+
+Feito isto, é feita uma erosão na imagem (eliminação dos pixels brancos nas bordas das imagens) de modo que isto remove ou pelo menos reduz possíveis ruídos na imagem provocados por diferenças entre intensidades luminosas entre as imagens (diferentes momentos do dia) e eventuais vibrações da camera devido ao vento. Como idealmente a imagem do intruso é maior que a dos ruídos, com a erosão os ruídos acabam sendo eliminados, enquanto a imagem do intruso permanece. 
+
+Para fazer o potencial intruso voltar ao tamanho original (ou algo semelhante a isto), fazemos a dilatação, que é apenas o processo inverso do ruído. Note que o ruído eliminado não irá voltar por causa do processo de dilatação.
+
+Agora, um possível problema, é do intruso (ou cachorro) estar desconexo, fazendo parecer como se ele fosse um conjunto de ruídos ou corpos menores ao invés de um único corpo. Para resolver isto, o que foi feito foi uma outra dilatação, no entanto esta bem maior, de modo que áreas próximas se conectarão, e então uma erosão de mesma intensidade (mesmo kernel) da dilatação, de modo que a imagem irá se reduzir como um conjunto, e não como imagens separadas.
+
+Finalmente, desenhamos o bounding box (menor retângulo que contém a imagem) das imagens restantes (idealmente uma ou zero), para isto foi usado a biblioteca OpenCV.
+
+Feito o bounding box, é calculado sua altura (h) e largura (w), para determinar-se se está área é grande o suciciente para ser considerada um intruso ou cachorro.
+
+Determinei que para h>10 e w>10, está área não seria considerada mais como ruído, devendo ser necessáriamente classificada como um intruso ou cachorro.
+
+Para diferenciar entre os dois, foi feita a inocente e simples premissa de que um cachorro tende a ser mais alongado e baixo, enquanto uma pessoa é mais alta e estreita, de modo que se w > h, é acusado como cachorro, senão intruso.
+
+Problemas/limitações
+
+O sistema não é perfeito, mesmo para este número pequeno de imagens. Primeiramente não foi possível de maneira genérica determinar se o cachorro branco num fundo branco era ou não ruído, poder-se-ia detectá-lo usando outras técnicas diferentes, mas que não entravam no escopo do trabalho.
+E também nossa premissa de que uma imagem cuja largura for maior que a altura seria indicativo de se tratar de um cachorro também não é sempre válida, já que um cachorro de frente, ao invés de de lado, apresenta as mesmas características que um humano.
